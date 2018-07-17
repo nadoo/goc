@@ -17,7 +17,7 @@ Change current directory to your package dir, then
 
 - build package for linux
     ```bash
-    goc bc
+    goc bl
     ```
 
 - install package to GOPATH

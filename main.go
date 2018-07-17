@@ -111,6 +111,6 @@ func main() {
 		}
 	}
 
-	fmt.Fprint(os.Stderr, "unknown command: "+cmd)
 	showHelp()
+	fmt.Fprint(os.Stderr, "unknown command: "+cmd)
 }
