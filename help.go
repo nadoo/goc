@@ -36,6 +36,7 @@ func showHelp() {
 	fmt.Println("     rlm: \trelease linux package(mips)")
 	fmt.Println("     rm: \trelease mac package")
 	fmt.Println("     rm32: \trelease mac package(x86)")
+	fmt.Println("     i: \tinstall package(x86)")
 	fmt.Println()
 	fmt.Println("Example:")
 	fmt.Println("     goc b")

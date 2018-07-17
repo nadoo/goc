@@ -53,6 +53,8 @@ var builds = []build{
 	{"rlmle", "linux", "mipsle", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rm", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rm32", "darwin", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
+
+	{"i", runtime.GOOS, runtime.GOARCH, "", "", []string{"install"}},
 }
 
 // Build :
@@ -105,7 +107,10 @@ func main() {
 			b.dir = dir
 			b.args = append(b.args, os.Args[2:]...)
 			Build(b, b.args...)
-			break
+			return
 		}
 	}
+
+	fmt.Fprint(os.Stderr, "unknown command: "+cmd)
+	showHelp()
 }
