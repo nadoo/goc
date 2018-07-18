@@ -1,8 +1,7 @@
 # goc
-a simple util for building go programs
+a simple compile tool for go
 
 ## Install
-Go Get
 ```bash
 go get -u github.com/nadoo/goc
 ```
@@ -20,7 +19,7 @@ Change current directory to your package dir, then
     goc bl
     ```
 
-- install package to GOPATH
+- install package to `GOPATH/bin`
     ```bash
     goc i
     ```
