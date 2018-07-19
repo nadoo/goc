@@ -33,10 +33,11 @@ type build struct {
 
 var builds = []build{
 	{"b", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i"}},
+	{"bd", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bw", "windows", "amd64", "", "", []string{"build", "-v", "-i"}},
-	{"bwp", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-tags=pprof"}},
+	{"bwd", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bl", "linux", "amd64", "", "", []string{"build", "-v", "-i"}},
-	{"blp", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=pprof"}},
+	{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bm", "darwin", "amd64", "", "", []string{"build", "-v", "-i"}},
 
 	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
