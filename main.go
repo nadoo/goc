@@ -40,7 +40,6 @@ var builds = []build{
 	{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bm", "darwin", "amd64", "", "", []string{"build", "-v", "-i"}},
 
-	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rw", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rw32", "windows", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rl", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
@@ -55,7 +54,9 @@ var builds = []build{
 	{"rm", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rm32", "darwin", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 
+	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"run"}},
 	{"i", runtime.GOOS, runtime.GOARCH, "", "", []string{"install"}},
+	{"c", runtime.GOOS, runtime.GOARCH, "", "", []string{"clean"}},
 }
 
 // Build :
