@@ -28,12 +28,16 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     ```
     b:         build package
     bd:        build dev package(-tags=dev)
+    bdr:       build dev package(-tags=dev and -race)
     bw:        build windows package
     bwd:       build windows dev package(-tags=dev)
+    bwdr:      build windows dev package(-tags=dev and -race)
     bl:        build linux package
     bld:       build linux dev package(-tags=dev)
+    bldr:      build linux dev package(-tags=dev and -race)
     bm:        build mac package
     bmd:       build mac dev package(-tags=dev)
+    bmdr:      build mac dev package(-tags=dev and -race)
 
     rw:        release windows package
     rw32:      release windows package(x86)

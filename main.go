@@ -34,11 +34,16 @@ type build struct {
 var builds = []build{
 	{"b", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i"}},
 	{"bd", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i", "-tags=dev"}},
+	{"bdr", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
 	{"bw", "windows", "amd64", "", "", []string{"build", "-v", "-i"}},
 	{"bwd", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
+	{"bwdr", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
 	{"bl", "linux", "amd64", "", "", []string{"build", "-v", "-i"}},
 	{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
+	{"bldr", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
 	{"bm", "darwin", "amd64", "", "", []string{"build", "-v", "-i"}},
+	{"bmd", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
+	{"bmdr", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
 
 	{"rw", "windows", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rw32", "windows", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
