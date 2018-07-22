@@ -1,12 +1,15 @@
 # goc
+
 a simple compile tool for go
 
 ## Install
+
 ```bash
 go get -u github.com/nadoo/goc
 ```
 
 ## Usage
+
 Change current directory to your package dir, then: `goc COMMAND [ARGS]`
 
 - build package
@@ -25,7 +28,7 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     ```
 
 - command list
-    ```
+    ```bash
     b:         build package
     bd:        build dev package(-tags=dev)
     bdr:       build dev package(-tags=dev and -race)
