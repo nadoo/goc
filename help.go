@@ -52,7 +52,7 @@ func showHelp() {
 	fmt.Println("     goc rl")
 	fmt.Println("       -release linux package")
 	fmt.Println()
-	fmt.Println("   Ver: 1.12.190905, Author: NadOo")
+	fmt.Println("   Ver: 1.0.0, Author: NadOo")
 	fmt.Println("   Source: https://github.com/nadoo/goc")
 	fmt.Println("-")
 }
