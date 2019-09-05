@@ -13,3 +13,7 @@
 
 goc
 goc.exe
+
+*.zip
+dist
+.goreleaser.yml

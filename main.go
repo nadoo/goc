@@ -1,7 +1,7 @@
 // ALL possible goos and goarch
 // https://github.com/golang/go/blob/master/src/go/build/syslist.go
-// const goosList = "android darwin dragonfly freebsd linux nacl netbsd openbsd plan9 solaris windows zos "
-// const goarchList = "386 amd64 amd64p32 arm armbe arm64 arm64be ppc64 ppc64le mips mipsle mips64 mips64le mips64p32 mips64p32le ppc s390 s390x sparc sparc64 "
+// const goosList = "aix android darwin dragonfly freebsd hurd illumos js linux nacl netbsd openbsd plan9 solaris windows zos "
+// const goarchList = "386 amd64 amd64p32 arm armbe arm64 arm64be ppc64 ppc64le mips mipsle mips64 mips64le mips64p32 mips64p32le ppc riscv riscv64 s390 s390x sparc sparc64 wasm "
 
 // for arm:
 // https://github.com/golang/go/wiki/GoArm
@@ -50,7 +50,6 @@ var builds = []build{
 	{"rw32", "windows", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rl", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rl32", "linux", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
-	// https://github.com/golang/go/wiki/GoArm
 	{"rla", "linux", "arm64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}}, // arm64 == arm v8
 	{"rla5", "linux", "arm", "5", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rla6", "linux", "arm", "6", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
