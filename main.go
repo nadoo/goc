@@ -19,6 +19,7 @@ import (
 // GO Environment
 var (
 	GOROOT = os.Getenv("GOROOT")
+	GOBIN = os.Getenv("GOBIN")
 	GOPATH = os.Getenv("GOPATH")
 )
 
@@ -49,11 +50,11 @@ var builds = []build{
 	{"rw32", "windows", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rl", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rl32", "linux", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
-	{"rla", "linux", "arm", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
+	// https://github.com/golang/go/wiki/GoArm
+	{"rla", "linux", "arm64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}}, // arm64 == arm v8
 	{"rla5", "linux", "arm", "5", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rla6", "linux", "arm", "6", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rla7", "linux", "arm", "7", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
-	{"rla8", "linux", "arm", "8", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rlm", "linux", "mips", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rlmle", "linux", "mipsle", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rm", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
@@ -75,15 +76,19 @@ func Build(b build, args ...string) {
 	cmd.Env = append(cmd.Env, "GOARCH="+b.arch)
 	cmd.Env = append(cmd.Env, "GOOS="+b.os)
 
-	if b.arm != "" {
-		cmd.Env = append(cmd.Env, "GOARM="+b.arm)
-	}
+
 
 	fmt.Println("-Environments:")
 	fmt.Println("   GOROOT:" + GOROOT)
+	fmt.Println("   GOBIN:" + GOBIN)
 	fmt.Println("   GOPATH:" + GOPATH)
 	fmt.Println("   GOARCH:" + b.arch)
 	fmt.Println("   GOOS:" + b.os)
+
+	if b.arm != "" {
+		cmd.Env = append(cmd.Env, "GOARM="+b.arm)
+		fmt.Println("   GOARM:" + b.arm)
+	}
 
 	fmt.Println("-Working Dir:")
 	fmt.Printf("   %s\n", cmd.Dir)

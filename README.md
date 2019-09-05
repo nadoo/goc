@@ -46,11 +46,10 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     rw32:      release windows package(x86)
     rl:        release linux package
     rl32:      release linux package(x86)
-    rla:       release linux package(arm)
+    rla:       release linux package(arm64/arm v8)
     rla5:      release linux package(arm v5)
     rla6:      release linux package(arm v6)
     rla7:      release linux package(arm v7)
-    rla8:      release linux package(arm v8)
     rlm:       release linux package(mips)
     rm:        release mac package
     rm32:      release mac package(x86)
