@@ -19,7 +19,7 @@ import (
 // GO Environment
 var (
 	GOROOT = os.Getenv("GOROOT")
-	GOBIN = os.Getenv("GOBIN")
+	GOBIN  = os.Getenv("GOBIN")
 	GOPATH = os.Getenv("GOPATH")
 )
 
@@ -73,21 +73,26 @@ func Build(b build, args ...string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
+	fmt.Println("-Environments:")
+	fmt.Println("   GOVER:\t" + runtime.Version())
+	fmt.Println("   GOROOT:\t" + GOROOT)
+	fmt.Println("   GOBIN:\t" + GOBIN)
+	if GOPATH != "" {
+		fmt.Println("   GOPATH:\t" + GOPATH)
+	}
+	fmt.Println("   GOOS:\t" + runtime.GOOS)
+	fmt.Println("   GOARCH:\t" + runtime.GOARCH)
+
+	fmt.Println("-Target:")
 	cmd.Env = append(cmd.Env, "GOARCH="+b.arch)
 	cmd.Env = append(cmd.Env, "GOOS="+b.os)
 
-
-
-	fmt.Println("-Environments:")
-	fmt.Println("   GOROOT:" + GOROOT)
-	fmt.Println("   GOBIN:" + GOBIN)
-	fmt.Println("   GOPATH:" + GOPATH)
-	fmt.Println("   GOARCH:" + b.arch)
-	fmt.Println("   GOOS:" + b.os)
+	fmt.Println("   GOOS:\t" + b.os)
+	fmt.Println("   GOARCH:\t" + b.arch)
 
 	if b.arm != "" {
 		cmd.Env = append(cmd.Env, "GOARM="+b.arm)
-		fmt.Println("   GOARM:" + b.arm)
+		fmt.Println("   GOARM:\t" + b.arm)
 	}
 
 	fmt.Println("-Working Dir:")

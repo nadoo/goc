@@ -55,6 +55,6 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     rm32:      release mac package(x86)
 
     r:         run package
-    i:         install package to `GOPATH/bin`
+    i:         install package to `GOBIN` or `GOPATH/bin`
     c:         clean package
     ```
