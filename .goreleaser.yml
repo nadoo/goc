@@ -1,0 +1,47 @@
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+
+# release:
+# $ git tag -a v0.1.0 -m "First release"
+# $ git push origin v0.1.0
+# $ goreleaser release --skip-publish --rm-dist
+
+# snapshot:
+# $ goreleaser --snapshot --rm-dist
+
+
+before:
+  hooks:
+    # you may remove this if you don't use vgo
+    - go mod tidy
+
+# https://goreleaser.com/build
+builds:
+- env:
+  - CGO_ENABLED=0
+  goos:
+      - windows
+      - linux
+      - darwin
+  goarch:
+      - amd64
+
+# https://goreleaser.com/archive
+archive:
+  name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+  wrap_in_directory: true
+  format: tar.gz
+  format_overrides:
+    - goos: windows
+      format: zip
+
+# https://goreleaser.com/checksum/
+checksum:
+  name_template: "{{ .ProjectName }}-{{ .Version }}-checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'

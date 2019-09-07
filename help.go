@@ -33,7 +33,7 @@ func showHelp() {
 	fmt.Println("     rm: \trelease mac package")
 	fmt.Println("     rm32: \trelease mac package(x86)")
 	fmt.Println()
-	fmt.Println("     r: \trun package")
+	fmt.Println("     r: \trun current package")
 	fmt.Println("     i: \tinstall package to `GOBIN` or `GOPATH/bin`")
 	fmt.Println("     c: \tclean package")
 	fmt.Println()
@@ -43,7 +43,7 @@ func showHelp() {
 	fmt.Println("     goc rl")
 	fmt.Println("       -release linux package")
 	fmt.Println()
-	fmt.Println("   Ver: 1.0.0, Author: NadOo")
+	fmt.Println("   Ver: " + version + ", Author: NadOo")
 	fmt.Println("   Source: https://github.com/nadoo/goc")
 	fmt.Println("-")
 }

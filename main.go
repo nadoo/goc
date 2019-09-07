@@ -16,6 +16,8 @@ import (
 	"runtime"
 )
 
+var version = "dev"
+
 // GO Environment
 var (
 	GOROOT = os.Getenv("GOROOT")
@@ -59,7 +61,7 @@ var builds = []build{
 	{"rm", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 	{"rm32", "darwin", "386", "", "", []string{"build", "-v", "-i", "-ldflags", "-s -w"}},
 
-	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"run"}},
+	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"run", "."}},
 	{"i", runtime.GOOS, runtime.GOARCH, "", "", []string{"install"}},
 	{"c", runtime.GOOS, runtime.GOARCH, "", "", []string{"clean"}},
 }

@@ -17,12 +17,12 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     goc b
     ```
 
-- build package for linux
+- release package for linux
     ```bash
-    goc bl
+    goc rl
     ```
 
-- install package to `GOPATH/bin`
+- install package to `GOBIN` or `GOPATH/bin`
     ```bash
     goc i
     ```
@@ -54,7 +54,7 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
     rm:        release mac package
     rm32:      release mac package(x86)
 
-    r:         run package
+    r:         run current package
     i:         install package to `GOBIN` or `GOPATH/bin`
     c:         clean package
     ```
