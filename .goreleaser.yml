@@ -1,7 +1,7 @@
 # Make sure to check the documentation at http://goreleaser.com
 
 # release:
-# git tag -a v0.1.0 -m "First release"
+# git tag -a v0.1.0 -m "v0.1.0"
 # git push origin v0.1.0
 # goreleaser release --skip-publish --rm-dist
 
