@@ -17,7 +17,9 @@ before:
 
 # https://goreleaser.com/build/
 builds:
-- env:
+- 
+  id: default
+  env:
   - CGO_ENABLED=0
   goos:
       - windows
