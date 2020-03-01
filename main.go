@@ -10,20 +10,60 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
 )
 
 var version = "dev"
 
 // GO Environment
 var (
-	GOROOT = os.Getenv("GOROOT")
-	GOBIN  = os.Getenv("GOBIN")
-	GOPATH = os.Getenv("GOPATH")
+	GOVER   = Env("GOVERSION")
+	GOROOT  = Env("GOROOT")
+	GOBIN   = Env("GOBIN")
+	GOPATH  = Env("GOPATH")
+	GOPROXY = Env("GOPROXY")
+	GOMOD   = Env("GOMOD")
 )
+
+var envs = []struct {
+	key  string
+	args []string
+}{
+	{"GOVERSION", []string{"version"}},
+	{"GOROOT", []string{"env", "GOROOT"}},
+	{"GOBIN", []string{"env", "GOBIN"}},
+	{"GOPATH", []string{"env", "GOPATH"}},
+	{"GOPROXY", []string{"env", "GOPROXY"}},
+	{"GOMOD", []string{"env", "GOMOD"}},
+}
+
+// Env is uesd to get go env.
+func Env(k string) (v string) {
+	var args []string
+	for _, env := range envs {
+		if env.key == k {
+			args = env.args
+			break
+		}
+	}
+
+	cmd := exec.Command("go", args...)
+	cmd.Env = os.Environ()
+	buf := &bytes.Buffer{}
+	cmd.Stdout = buf
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		fmt.Fprint(os.Stderr, err.Error())
+	}
+
+	return strings.TrimSpace(buf.String())
+}
 
 type build struct {
 	cmd  string
@@ -66,7 +106,7 @@ var builds = []build{
 	{"c", runtime.GOOS, runtime.GOARCH, "", "", []string{"clean"}},
 }
 
-// Build :
+// Build is used to execute build commands.
 func Build(b build, args ...string) {
 	cmd := exec.Command("go", args...)
 	cmd.Env = os.Environ()
@@ -81,6 +121,8 @@ func Build(b build, args ...string) {
 	if GOPATH != "" {
 		fmt.Println("   GOPATH:\t" + GOPATH)
 	}
+	fmt.Println("   GOPROXY:\t" + GOPROXY)
+	fmt.Println("   GOMOD:\t" + GOMOD)
 	fmt.Println("   GOOS:\t" + runtime.GOOS)
 	fmt.Println("   GOARCH:\t" + runtime.GOARCH)
 
