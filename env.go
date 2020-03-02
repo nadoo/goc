@@ -62,7 +62,7 @@ func GetEnv() map[string]string {
 
 	lines := strings.Split(buf.String(), "\n")
 	for _, line := range lines {
-		kv := strings.Split(line, "=")
+		kv := strings.Split(strings.Replace(line, "set ", "", 1), "=")
 		if len(kv) > 1 {
 			env[strings.TrimSpace(kv[0])] = strings.TrimSpace(kv[1])
 		}
