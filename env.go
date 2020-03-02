@@ -20,17 +20,6 @@ var (
 	GOMOD   = Env["GOMOD"]
 )
 
-var envs = []struct {
-	key  string
-	args []string
-}{
-	{"GOROOT", []string{"env", "GOROOT"}},
-	{"GOBIN", []string{"env", "GOBIN"}},
-	{"GOPATH", []string{"env", "GOPATH"}},
-	{"GOPROXY", []string{"env", "GOPROXY"}},
-	{"GOMOD", []string{"env", "GOMOD"}},
-}
-
 // GetVer is uesd to get go version.
 func GetVer() string {
 	cmd := exec.Command("go", "version")
