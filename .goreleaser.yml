@@ -17,30 +17,27 @@ before:
 
 # https://goreleaser.com/build/
 builds:
-- 
-  id: default
-  env:
-  - CGO_ENABLED=0
-  goos:
+  - id: default
+    env:
+      - CGO_ENABLED=0
+    goos:
       - windows
       - linux
       - darwin
-  goarch:
+    goarch:
       - amd64
 
 # https://goreleaser.com/archive/
 archives:
--
-  id: default
-
-  builds:
-  - default
-  name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
-  wrap_in_directory: true
-  format: tar.gz
-  format_overrides:
-    - goos: windows
-      format: zip
+  - id: default
+    builds:
+      - default
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    wrap_in_directory: true
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
 
 # https://goreleaser.com/snapshots/
 snapshot:
@@ -54,5 +51,5 @@ changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - '^docs:'
+      - '^test:'
