@@ -12,7 +12,7 @@ var Env = GetEnv()
 
 // GO Environment
 var (
-	GOVER   = GetVer()
+	GOVER   = GoVer()
 	GOROOT  = Env["GOROOT"]
 	GOBIN   = Env["GOBIN"]
 	GOPATH  = Env["GOPATH"]
@@ -20,8 +20,8 @@ var (
 	GOMOD   = Env["GOMOD"]
 )
 
-// GetVer is uesd to get go version.
-func GetVer() string {
+// GoVer erturns the go version.
+func GoVer() string {
 	cmd := exec.Command("go", "version")
 	cmd.Env = os.Environ()
 	buf := &bytes.Buffer{}

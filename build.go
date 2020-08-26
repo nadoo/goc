@@ -57,7 +57,7 @@ func Build(b build, args ...string) {
 	cmd.Stderr = os.Stderr
 
 	fmt.Println("-Environments:")
-	fmt.Println("   GOVER:\t" + runtime.Version())
+	fmt.Println("   GOVER:\t" + GOVER)
 	fmt.Println("   GOROOT:\t" + GOROOT)
 	fmt.Println("   GOBIN:\t" + GOBIN)
 	fmt.Println("   GOPATH:\t" + GOPATH)
