@@ -17,6 +17,8 @@ func showHelp() {
 	fmt.Println("     bl: \tbuild linux package")
 	fmt.Println("     bld: \tbuild linux dev package(-tags=dev)")
 	fmt.Println("     bldr: \tbuild linux dev package(-tags=dev and -race)")
+	fmt.Println("     blad: \tbuild linux dev package(-tags=dev)(arm64/arm v8)")
+	fmt.Println("     bladr: \tbuild linux dev package(-tags=dev and -race)(arm64/arm v8)")
 	fmt.Println("     bm: \tbuild mac package")
 	fmt.Println("     bmd: \tbuild mac dev package(-tags=dev)")
 	fmt.Println("     bmdr: \tbuild mac dev package(-tags=dev and -race)")
