@@ -26,6 +26,8 @@ var builds = []build{
 	{"bl", "linux", "amd64", "", "", []string{"build", "-v", "-i"}},
 	{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bldr", "linux", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
+	{"blad", "linux", "arm64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},           // arm64 == arm v8
+	{"bladr", "linux", "arm64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}}, // arm64 == arm v8
 	{"bm", "darwin", "amd64", "", "", []string{"build", "-v", "-i"}},
 	{"bmd", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev"}},
 	{"bmdr", "darwin", "amd64", "", "", []string{"build", "-v", "-i", "-tags=dev", "-race"}},
