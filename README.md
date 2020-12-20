@@ -43,6 +43,9 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
      bm: 	build mac package
      bmd: 	build mac dev package(-tags=dev)
      bmdr: 	build mac dev package(-tags=dev and -race)
+     bma: 	build mac package(arm64)
+     bmad: 	build mac dev package(-tags=dev)(arm64)
+     bmadr: build mac dev package(-tags=dev and -race)(arm64)
 
      rw: 	release windows package
      rw32: 	release windows package(x86)
@@ -53,8 +56,9 @@ Change current directory to your package dir, then: `goc COMMAND [ARGS]`
      rla6: 	release linux package(arm v6)
      rla7: 	release linux package(arm v7)
      rlm: 	release linux package(mips)
+     rlmle: release linux package(mipsle)
      rm: 	release mac package
-     rm32: 	release mac package(x86)
+     rma: 	release mac package(arm64)
 
      r: 	run current package
      i: 	install package to `GOBIN` or `GOPATH/bin`
