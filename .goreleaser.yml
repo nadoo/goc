@@ -26,13 +26,15 @@ builds:
       - darwin
     goarch:
       - amd64
+      - arm64
 
 # https://goreleaser.com/archive/
 archives:
   - id: default
     builds:
       - default
-    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    replacements:
+      darwin: macos
     wrap_in_directory: true
     format: tar.gz
     format_overrides:
@@ -41,11 +43,11 @@ archives:
 
 # https://goreleaser.com/snapshots/
 snapshot:
-  name_template: "dev@{{.ShortCommit}}"
+  name_template: '{{ incpatch .Version }}-dev-{{.ShortCommit}}'
 
 # https://goreleaser.com/checksum/
 checksum:
-  name_template: "{{ .ProjectName }}-{{ .Version }}-checksums.txt"
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
 
 changelog:
   sort: asc
