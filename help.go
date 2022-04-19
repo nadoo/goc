@@ -9,7 +9,7 @@ func showHelp() {
 	fmt.Println()
 	fmt.Println("COMMAND")
 	for _, build := range builds {
-		fmt.Printf("     %s: \t%s\n", build.cmd, build.help)
+		fmt.Printf("     %-12s%s\n", build.cmd+":", build.help)
 	}
 	fmt.Println()
 	fmt.Println("Example:")
