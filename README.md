@@ -5,7 +5,7 @@ a simple compile tool for go
 ## Install
 
 ```bash
-go get -u github.com/nadoo/goc
+go install github.com/nadoo/goc@latest
 ```
 
 ## Usage
