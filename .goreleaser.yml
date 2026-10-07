@@ -1,21 +1,9 @@
-# Make sure to check the documentation at http://goreleaser.com
-
-# release:
-# git tag -a v0.1.0 -m "v0.1.0"
-# git push origin v0.1.0
-# goreleaser release --skip-publish --rm-dist
-
-# snapshot:
-# goreleaser --snapshot --rm-dist
-
-# https://goreleaser.com/customization/
+version: 2
 
 before:
   hooks:
-    # you may remove this if you don't use vgo
     - go mod tidy
 
-# https://goreleaser.com/build/
 builds:
   - id: default
     env:
@@ -28,24 +16,19 @@ builds:
       - amd64
       - arm64
 
-# https://goreleaser.com/archive/
 archives:
   - id: default
     builds:
       - default
-    replacements:
-      darwin: macos
     wrap_in_directory: true
     format: tar.gz
     format_overrides:
       - goos: windows
         format: zip
 
-# https://goreleaser.com/snapshots/
 snapshot:
   name_template: '{{ incpatch .Version }}-dev-{{.ShortCommit}}'
 
-# https://goreleaser.com/checksum/
 checksum:
   name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
 
