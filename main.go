@@ -28,8 +28,9 @@ func main() {
 
 	cmd := os.Args[1]
 	dir, _ := os.Getwd()
+	SetVer(dir)
 
-	for _, b := range builds {
+	for _, b := range builds() {
 		if b.cmd == cmd {
 			b.dir = dir
 			b.args = append(b.args, os.Args[2:]...)

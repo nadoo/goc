@@ -59,3 +59,17 @@ func GetEnv() map[string]string {
 
 	return env
 }
+
+// SetVer gets the version of the repository containing dir. An empty
+// result means Git is unavailable or the directory has no Git revision.
+func SetVer(dir string) {
+	cmd := exec.Command("git", "describe", "--tags", "--always", "--dirty")
+	cmd.Dir = dir
+	out, err := cmd.Output()
+	if err != nil {
+		return
+	}
+	if ver := strings.TrimSpace(string(out)); ver != "" {
+		version = ver
+	}
+}

@@ -8,7 +8,7 @@ func showHelp() {
 	fmt.Println("Usage: goc COMMAND [ARGS]")
 	fmt.Println()
 	fmt.Println("COMMAND")
-	for _, build := range builds {
+	for _, build := range builds() {
 		fmt.Printf("     %-12s%s\n", build.cmd+":", build.help)
 	}
 	fmt.Println()

@@ -17,41 +17,44 @@ type build struct {
 	help string
 }
 
-var builds = []build{
-	{"b", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v"}, "build package"},
-	{"bd", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-tags=dev"}, "build dev package(-tags=dev)"},
-	{"bdr", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-tags=dev", "-race"}, "build dev package(-tags=dev and -race)"},
-	{"bw", "windows", "amd64", "", "", []string{"build", "-v"}, "build windows package(amd64)"},
-	{"bwd", "windows", "amd64", "", "", []string{"build", "-v", "-tags=dev"}, "build windows dev package(-tags=dev)(amd64)"},
-	{"bwdr", "windows", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-race"}, "build windows dev package(-tags=dev and -race)(amd64)"},
-	{"bl", "linux", "amd64", "", "", []string{"build", "-v"}, "build linux package(amd64)"},
-	{"bl3", "linux", "amd64", "v3", "", []string{"build", "-v"}, "build linux package(amd64v3)"},
-	{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-tags=dev"}, "build linux dev package(-tags=dev)(amd64)"},
-	{"bld3", "linux", "amd64", "v3", "", []string{"build", "-v", "-tags=dev"}, "build linux dev package(-tags=dev)(amd64v3)"},
-	{"bldr", "linux", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-race"}, "build linux dev package(-tags=dev and -race)(amd64)"},
-	{"blad", "linux", "arm64", "", "", []string{"build", "-v", "-tags=dev"}, "build linux dev package(-tags=dev)(arm64)"}, // arm64 == arm v8
-	{"bladr", "linux", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-race"}, "build linux dev package(-tags=dev and -race)(arm64)"},
-	{"bm", "darwin", "arm64", "", "", []string{"build", "-v"}, "build mac package(arm64)"},
-	{"bmd", "darwin", "arm64", "", "", []string{"build", "-v", "-tags=dev"}, "build mac dev package(-tags=dev)(arm64)"},
-	{"bmdr", "darwin", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-race"}, "build mac dev package(-tags=dev and -race)(arm64)"},
+// builds uses the current version when constructing release arguments.
+func builds() []build {
+	return []build{
+		{"b", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-ldflags", "-X main.version=" + version}, "build package"},
+		{"bd", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build dev package(-tags=dev)"},
+		{"bdr", runtime.GOOS, runtime.GOARCH, "", "", []string{"build", "-v", "-tags=dev", "-race", "-ldflags", "-X main.version=" + version}, "build dev package(-tags=dev and -race)"},
+		{"bw", "windows", "amd64", "", "", []string{"build", "-v", "-ldflags", "-X main.version=" + version}, "build windows package(amd64)"},
+		{"bwd", "windows", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build windows dev package(-tags=dev)(amd64)"},
+		{"bwdr", "windows", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-race", "-ldflags", "-X main.version=" + version}, "build windows dev package(-tags=dev and -race)(amd64)"},
+		{"bl", "linux", "amd64", "", "", []string{"build", "-v", "-ldflags", "-X main.version=" + version}, "build linux package(amd64)"},
+		{"bl3", "linux", "amd64", "v3", "", []string{"build", "-v", "-ldflags", "-X main.version=" + version}, "build linux package(amd64v3)"},
+		{"bld", "linux", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build linux dev package(-tags=dev)(amd64)"},
+		{"bld3", "linux", "amd64", "v3", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build linux dev package(-tags=dev)(amd64v3)"},
+		{"bldr", "linux", "amd64", "", "", []string{"build", "-v", "-tags=dev", "-race", "-ldflags", "-X main.version=" + version}, "build linux dev package(-tags=dev and -race)(amd64)"},
+		{"blad", "linux", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build linux dev package(-tags=dev)(arm64)"}, // arm64 == arm v8
+		{"bladr", "linux", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-race", "-ldflags", "-X main.version=" + version}, "build linux dev package(-tags=dev and -race)(arm64)"},
+		{"bm", "darwin", "arm64", "", "", []string{"build", "-v", "-ldflags", "-X main.version=" + version}, "build mac package(arm64)"},
+		{"bmd", "darwin", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-ldflags", "-X main.version=" + version}, "build mac dev package(-tags=dev)(arm64)"},
+		{"bmdr", "darwin", "arm64", "", "", []string{"build", "-v", "-tags=dev", "-race", "-ldflags", "-X main.version=" + version}, "build mac dev package(-tags=dev and -race)(arm64)"},
 
-	{"rw", "windows", "amd64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release windows package(amd64)"},
-	{"rw3", "windows", "amd64", "v3", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release windows package(amd64v3)"},
-	{"rw32", "windows", "386", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release windows package(x86)"},
-	{"rl", "linux", "amd64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(amd64)"},
-	{"rl3", "linux", "amd64", "v3", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(amd64v3)"},
-	{"rl32", "linux", "386", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(x86)"},
-	{"rla", "linux", "arm64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(arm64)"}, // arm64 == arm v8
-	{"rla5", "linux", "arm", "5", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(arm v5)"},
-	{"rla6", "linux", "arm", "6", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(arm v6)"},
-	{"rla7", "linux", "arm", "7", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(arm v7)"},
-	{"rlm", "linux", "mips", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(mips)"},
-	{"rlmle", "linux", "mipsle", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release linux package(mipsle)"},
-	{"rm", "darwin", "arm64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w"}, "release mac package(arm64)"},
+		{"rw", "windows", "amd64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release windows package(amd64)"},
+		{"rw3", "windows", "amd64", "v3", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release windows package(amd64v3)"},
+		{"rw32", "windows", "386", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release windows package(x86)"},
+		{"rl", "linux", "amd64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(amd64)"},
+		{"rl3", "linux", "amd64", "v3", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(amd64v3)"},
+		{"rl32", "linux", "386", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(x86)"},
+		{"rla", "linux", "arm64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(arm64)"}, // arm64 == arm v8
+		{"rla5", "linux", "arm", "5", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(arm v5)"},
+		{"rla6", "linux", "arm", "6", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(arm v6)"},
+		{"rla7", "linux", "arm", "7", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(arm v7)"},
+		{"rlm", "linux", "mips", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(mips)"},
+		{"rlmle", "linux", "mipsle", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release linux package(mipsle)"},
+		{"rm", "darwin", "arm64", "", "", []string{"build", "-v", "-trimpath", "-ldflags", "-s -w -X main.version=" + version}, "release mac package(arm64)"},
 
-	{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"run", "."}, "run current package"},
-	{"i", runtime.GOOS, runtime.GOARCH, "", "", []string{"install"}, "install package to `GOBIN` or `GOPATH/bin`"},
-	{"c", runtime.GOOS, runtime.GOARCH, "", "", []string{"clean"}, "clean package"},
+		{"r", runtime.GOOS, runtime.GOARCH, "", "", []string{"run", "."}, "run current package"},
+		{"i", runtime.GOOS, runtime.GOARCH, "", "", []string{"install", "-ldflags", "-X main.version=" + version}, "install package to `GOBIN` or `GOPATH/bin`"},
+		{"c", runtime.GOOS, runtime.GOARCH, "", "", []string{"clean"}, "clean package"},
+	}
 }
 
 // Build is used to execute build commands.
@@ -91,11 +94,11 @@ func Build(b build, args ...string) {
 	}
 
 	fmt.Println("-Working Dir:")
-	fmt.Printf("   %s\n", cmd.Dir)
+	fmt.Printf("   %s: %s\n\n", cmd.Dir, version)
 
-	fmt.Println("-Exec program:")
+	fmt.Println("-Exec Program:")
 	fmt.Printf("   path: %s\n", cmd.Path)
-	fmt.Printf("   args: %v\n\n", cmd.Args[1:])
+	fmt.Printf("   args: %v\n", cmd.Args[1:])
 
 	fmt.Println("\n-Exec outputs:\n-----")
 
